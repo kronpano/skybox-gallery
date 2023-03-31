@@ -146,7 +146,6 @@ function LoadHandlebarsTemplates(){
     // Close modal when clicking outside the modal or on the close button
     $("#imageModal").on("click", ".modal-dialog, .btn-close", function (e) {
       if (e.target !== this) return;
-      closeViewport();
       imageModal.hide();
     });
 
