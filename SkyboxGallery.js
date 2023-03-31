@@ -32,6 +32,24 @@ let apiKey = ``;
 // const container = document.getElementById("container");
 
 
+	const downloadJPG = async (url, filename) => {
+		const data = await fetch(url)
+		const blob = await data.blob()
+		const objectUrl = URL.createObjectURL(blob)
+
+		const link = document.createElement('a')
+
+		link.setAttribute('href', objectUrl)
+		link.setAttribute('download', filename)
+		link.style.display = 'none'
+
+		document.body.appendChild(link)
+	  
+		link.click()
+	  
+		document.body.removeChild(link)
+	}
+
 function LoadHandlebarsTemplates(){
     const categories = Array.from(new Set(imageList.map((image) => image.type)));
 
@@ -110,6 +128,17 @@ function LoadHandlebarsTemplates(){
 			"autoRotateStopDelay": 3000,
 			"autoRotateInactivityDelay": 3000
 		});
+		
+	const viewport = document.createElement("div");
+
+	// Add download button to the viewport
+	const downloadBtn = document.createElement("button");
+	downloadBtn.className = "download-btn";
+	downloadBtn.style="z-index: 10;cursor:pointer;"
+	downloadBtn.textContent = "Download";
+	container.appendChild(downloadBtn);
+	downloadBtn.onclick = function(){downloadJPG(src, title)}
+
 	  
       //createViewport2(createConfig(src, title));
     });
@@ -120,7 +149,6 @@ function LoadHandlebarsTemplates(){
       closeViewport();
       imageModal.hide();
     });
-
 
 }
 
