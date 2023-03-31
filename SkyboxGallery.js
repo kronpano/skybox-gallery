@@ -100,7 +100,18 @@ function LoadHandlebarsTemplates(){
       $("#imageModalDetails .seed").text(details.seed);
   
       imageModal.show();
-      createViewport2(createConfig(src, title));
+	  
+	  pannellum.viewer('container', {
+			"type": "equirectangular",
+			"panorama": src,
+			"showZoomCtrl": false,
+			"autoLoad": true,
+			"autoRotate": 1,
+			"autoRotateStopDelay": 3000,
+			"autoRotateInactivityDelay": 3000
+		});
+	  
+      //createViewport2(createConfig(src, title));
     });
   
     // Close modal when clicking outside the modal or on the close button
